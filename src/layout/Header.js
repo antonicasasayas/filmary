@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
+import { useContext } from "react";
+import { LanguageContext } from "../context/LanguageContext";
+
 const Header = () => {
+  const { language, setLanguage } = useContext(LanguageContext)
+  useEffect(() => {
+    console.log(language)
+  
+  }, [language])
+  
   const [query, setQuery] = useState("");
   const [displayError, setDisplayError] = useState(false)
   const showError = () => {
@@ -44,6 +53,14 @@ const Header = () => {
           <AiOutlineSearch size={30} />
         </button>
       </form>
+      <select onChange={ (e) => setLanguage(e.target.value)} className="text-black p-1.5 rounded-md" name="language" id="">
+        <option value="en">
+          English
+        </option>
+        <option  value="es">
+          Español
+        </option>
+      </select>
     </div>
   );
 };

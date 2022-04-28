@@ -1,72 +1,88 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Header from './Header'
 import { Link } from 'react-router-dom';
+import { LanguageContext } from '../context/LanguageContext';
 const genres = [
   {
     id: 28,
-    name: "Action",
+    en: "Action",
+    es: "Acción",
   },
   {
     id: 12,
-    name: "Adventure",
+    en: "Adventure",
+    es: "Aventuras",
   },
   {
     id: 16,
-    name: "Animation",
+    en: "Animation",
+    es: "Animación",
   },
   {
     id: 35,
-    name: "Comedy",
+    en: "Comedy",
+    es: "Comedia",
   },
   {
     id: 80,
-    name: "Crime",
+    en: "Crime",
+    es: "Crimen",
   },
   {
     id: 99,
-    name: "Documentary",
+    en: "Documentary",
+    es: "Documental",
   },
   {
     id: 18,
-    name: "Drama",
+    en: "Drama",
+    es: "Drama",
   },
   {
     id: 10751,
-    name: "Family",
+    en: "Family",
+    es: "Familia",
   },
   {
     id: 14,
-    name: "Fantasy",
+    en: "Fantasy",
+    es: "Fantasía",
   },
   {
     id: 36,
-    name: "History",
+    en: "History",
+    es: "Historia",
   },
   {
     id: 27,
-    name: "Horror",
+    en: "Horror",
+    es: "Terror",
   },
   
   {
     id: 9648,
-    name: "Mystery",
+    en: "Mystery",
+    es: "Misterio",
   },
   {
     id: 10749,
-    name: "Romance",
+    en: "Romance",
+    es: "Romance",
   },
   {
     id: 878,
-    name: "Science Fiction",
+    en: "Science Fiction",
+    es: "Ciencia Ficción",
   },
-  
   {
     id: 53,
-    name: "Thriller",
+    en: "Thriller",
+    es: "Thriller",
   },
   
 ];
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
+  const {language} = useContext(LanguageContext)
   return (
     <>
       <Header />
@@ -84,7 +100,7 @@ const Layout = ({children}) => {
             {genres.map((genre) => (
               <div key={genre.id} className=" inline-block my-1.5  text-xl">
                 <Link to={"/genre/" + genre.id}>
-                  <span className="cursor-pointer ">{genre.name}</span>
+                  <span className="cursor-pointer ">{language === 'en' ? genre.en : genre.es}</span>
                 </Link>
               </div>
             ))}

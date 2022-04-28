@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const baseUrl = `https://api.themoviedb.org/3`;
 
 class MoviesService {
@@ -11,14 +10,18 @@ class MoviesService {
       },
     });
   }
-
-  getTopRated = () => this.instance.get("/movie/top_rated");
-  getBySearch = (query) => this.instance.get(`/search/movie?query=${query}`);
-  getByGenre = (genre) =>
-    this.instance.get(`/discover/movie?with_genres=${genre}`);
-  getById = (id) => this.instance.get(`/movie/${id}`);
-  getRecommendedFilms = (id) =>
-    this.instance.get(`/movie/${id}/recommendations`);
+  getTopRated = (language) =>
+    this.instance.get(`/movie/top_rated?language=${language}`);
+  getBySearch = (query, language) =>
+    this.instance.get(`/search/movie?query=${query}?language=${language}`);
+  getByGenre = (genre, language) =>
+    this.instance.get(
+      `/discover/movie?with_genres=${genre}?language=${language}`
+    );
+  getById = (id, language) =>
+    this.instance.get(`/movie/${id}?language=${language}`);
+  getRecommendedFilms = (id, language) =>
+    this.instance.get(`/movie/${id}/recommendations?language=${language}`);
 }
 
 const moviesService = new MoviesService();

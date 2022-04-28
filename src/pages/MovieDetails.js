@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import axios from 'axios'
 import MovieCard from '../components/MovieCard';
 import moviesService from '../services/MoviesService';
+import { LanguageContext } from "../context/LanguageContext";
+
 const MovieDetails = () => {
   const [info, setInfo] = useState()
   const [recommendedFilms, setRecommendedFilms] = useState()
       const { id } = useParams();
 
+  const { language } = useContext(LanguageContext);
   
   useEffect(() => {
     moviesService
-      .getById(id)
+      .getById(id, language)
       .then((response) => {
         setInfo(response.data);
       })
@@ -19,14 +21,14 @@ const MovieDetails = () => {
         console.log(`ERROR: ${error}`);
       });
     moviesService
-      .getRecommendedFilms(id)
+      .getRecommendedFilms(id, language)
       .then((response) => {
         setRecommendedFilms(response.data.results);
       })
       .catch((error) => {
         console.log(`ERROR: ${error}`);
       });
-  }, [id]);
+  }, [id, language]);
 
   
   return info && recommendedFilms ? (
@@ -68,7 +70,7 @@ const MovieDetails = () => {
         </div>
       </div>
       <h3 className="lg:text-4xl text-xl font-extrabold text-center my-12">
-        If you liked {info.title}, you will LOVE...
+        {language === 'en' ? `If you liked ${info.title}, you will LOVE...` : `Si te gustó ${info.title}, te va a ENCANTAR... `}
       </h3>
       <div className="grid mx-2 lg:grid-cols-4 pb-24 gap-10">
         {recommendedFilms.slice(0, 4).map((movie) => (
