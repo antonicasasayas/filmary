@@ -1,35 +1,23 @@
-
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import MovieCard from "../components/MovieCard";
+import moviesService from "../services/MoviesService";
 const SearchPage = () => {
   const [info, setInfo] = useState([]);
 
   const { query } = useParams();
-  function getData() {
-    const params = new URLSearchParams([["query", query]]);
 
-    axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&include_adult=false`,
-        { params }
-      )
+  useEffect(() => {
+    
+    moviesService
+      .getBySearch(query)
       .then((response) => {
         setInfo(response.data.results);
       })
       .catch((error) => {
         console.log(`ERROR: ${error}`);
       });
-  }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-    console.log(info);
-   
 
   return info ? (
     <div className="pt-12 lg:pt-0">
@@ -37,12 +25,16 @@ const SearchPage = () => {
         {query} films
       </h1>
       <div className="grid gap-10  lg:grid-cols-4">
-        {info.filter(movie => movie.poster_path?.length> 0).map((movie) => (
-          <MovieCard key={movie.id} {...movie} />
-        ))}
+        {info
+          .filter((movie) => movie.poster_path?.length > 0)
+          .map((movie) => (
+            <MovieCard key={movie.id} {...movie} />
+          ))}
       </div>
     </div>
-  ) : 'Loading';
+  ) : (
+    "Loading"
+  );
 };
 
 export default SearchPage;

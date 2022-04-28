@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import { useParams } from "react-router-dom";
+import moviesService from "../services/MoviesService";
 const genres = [
   {
     id: 28,
@@ -84,23 +85,17 @@ const genres = [
 function Genre() {
     const [movies, setMovies] = useState([]);
     const { id } = useParams();
+
+  useEffect(() => {
     
-    function getData() {
-      const params = new URLSearchParams([["with_genres", id]]);
-    axios
-      .get(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}`, {params}
-      )
+    moviesService
+      .getByGenre(id)
       .then((response) => {
         setMovies(response.data.results);
       })
       .catch((error) => {
         console.log(`ERROR: ${error}`);
       });
-  }
-
-  useEffect(() => {
-    getData();
   }, [id]);
     
   

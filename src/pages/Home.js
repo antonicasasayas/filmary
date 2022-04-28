@@ -1,26 +1,19 @@
 import "../App.css";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
+import moviesService from "../services/MoviesService";
 function Home() {
   const [movies, setMovies] = useState([]);
-
-  function getData() {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}`
-      )
+  
+  useEffect(() => {
+    moviesService
+      .getTopRated()
       .then((response) => {
         setMovies(response.data.results);
       })
       .catch((error) => {
         console.log(`ERROR: ${error}`);
       });
-  }
-
-  
-  useEffect(() => {
-    getData();
   }, []);
  
 

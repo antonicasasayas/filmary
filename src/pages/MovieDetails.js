@@ -2,40 +2,30 @@ import React, {useEffect, useState} from 'react'
 import { useParams } from "react-router-dom";
 import axios from 'axios'
 import MovieCard from '../components/MovieCard';
+import moviesService from '../services/MoviesService';
 const MovieDetails = () => {
   const [info, setInfo] = useState()
   const [recommendedFilms, setRecommendedFilms] = useState()
       const { id } = useParams();
 
-
-  function getData() {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`
-      )
+  
+  useEffect(() => {
+    moviesService
+      .getById(id)
       .then((response) => {
         setInfo(response.data);
       })
       .catch((error) => {
         console.log(`ERROR: ${error}`);
       });
-  }
-  function getRecommendedFilms() {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`
-      )
+    moviesService
+      .getRecommendedFilms(id)
       .then((response) => {
         setRecommendedFilms(response.data.results);
       })
       .catch((error) => {
         console.log(`ERROR: ${error}`);
       });
-  }
-  
-  useEffect(() => {
-    getData();
-    getRecommendedFilms();
   }, [id]);
 
   
