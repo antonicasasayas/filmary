@@ -87,15 +87,15 @@ const Layout = ({ children }) => {
     <>
       <Header />
 
-      <div class="drawer drawer-mobile">
+      <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle " />
-        <div class="drawer-content  flex flex-col items-center  justify-center">
-          <main className=" text-white h-full lg:pt-12 lg:pl-12 ">{children}</main>
+        <div className="drawer-content  flex flex-col items-center  justify-center">
+          <main className=" text-white h-full lg:pt-12  ">{children}</main>
         </div>
         
-        <div class="drawer-side">
+        <div className="drawer-side">
         
-          <label for="my-drawer-2" class="drawer-overlay"></label>
+          <label for="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4  bg-sidebar overflow-y-auto w-64 text-white ">
             {genres.map((genre) => (
               <div key={genre.id} className=" inline-block my-1.5  text-xl">

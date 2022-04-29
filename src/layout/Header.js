@@ -25,7 +25,7 @@ const Header = () => {
   };
   return (
     <div className=" bg-black text-white h-16 items-center flex justify-between px-2  lg:px-6">
-      <label for="my-drawer-2" class=" drawer-button lg:hidden">
+      <label for="my-drawer-2" className=" drawer-button lg:hidden">
         <AiOutlineMenu />
       </label>
       <Link to="/">
@@ -39,12 +39,12 @@ const Header = () => {
           <input
             onChange={(e) => setQuery(e.target.value)}
             type="text"
-            placeholder="Search..."
+            placeholder={language === 'en' ? 'Search...' : 'Buscar...'}
             className="h-9 w-40 lg:w-96 pl-4 text-black rounded-md"
           ></input>
           {displayError && (
             <span className="text-red-500 text-xs mr-2">
-              Type more than 2 char.
+              { language === 'en' ? 'Type more than 2 char.' : 'Escribe más de 2 caracteres.'}
             </span>
           )}
         </div>

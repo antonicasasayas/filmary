@@ -10,13 +10,14 @@ class MoviesService {
       },
     });
   }
+
   getTopRated = (language) =>
     this.instance.get(`/movie/top_rated?language=${language}`);
-  getBySearch = (query, language) =>
-    this.instance.get(`/search/movie?query=${query}?language=${language}`);
-  getByGenre = (genre, language) =>
+  getBySearch = (query, language = 'en') =>
+    this.instance.get(`/search/movie?query=${query}&language=${language}`);
+  getByGenre = (genre, language = 'en') =>
     this.instance.get(
-      `/discover/movie?with_genres=${genre}?language=${language}`
+      `/discover/movie?with_genres=${genre}&language=${language}`
     );
   getById = (id, language) =>
     this.instance.get(`/movie/${id}?language=${language}`);

@@ -11,12 +11,16 @@ import ScrollToTop from "./components/ScrollToTop";
 import Genre from "./pages/Genre";
 import SearchPage from "./pages/SearchPage";
 import { LanguageContext } from "./context/LanguageContext";
+import { ThemeProvider } from "styled-components";
+import GlobalStyles, { theme } from "./components/styles/Theme";
 export default function App() {
   const [language, setLanguage] = useState('en')
+
   return (
     <Router>
-      <ScrollToTop />
       <LanguageContext.Provider value={{ language, setLanguage }}>
+        <ScrollToTop />
+
         <Layout>
           <Routes>
             <Route element={<MovieDetails />} path="/movies/:id" />

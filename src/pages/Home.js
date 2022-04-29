@@ -23,7 +23,7 @@ function Home() {
       <h1 className="text-center text-3xl lg:text-5xl mb-12 font-extrabold">
         {language === 'en' ? 'The best rated movies' : 'Las películas mejor valoradas'}
       </h1>
-      <div className="grid gap-10 overflow-hidden grid-cols-1  lg:grid-cols-4">
+      <div className="grid gap-10 grid-cols-1  lg:grid-cols-4">
         {movies.map((movie) => (
           <MovieCard key={movie.id} {...movie} />
         ))}

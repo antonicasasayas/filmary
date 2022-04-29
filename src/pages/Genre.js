@@ -95,12 +95,11 @@ const genres = [
   
 ];
 function Genre() {
-    const [movies, setMovies] = useState([]);
-    const { id } = useParams();
+  const [movies, setMovies] = useState([]);
+  const { id } = useParams();
   const { language } = useContext(LanguageContext);
 
   useEffect(() => {
-    
     moviesService
       .getByGenre(id, language)
       .then((response) => {
@@ -110,16 +109,14 @@ function Genre() {
         console.log(`ERROR: ${error}`);
       });
   }, [id, language]);
-    
-  
 
   return (
     <div className="pt-12 lg:pt-0">
       <h1 className="text-center text-5xl mb-12 font-extrabold">
         {language === "es" ? (
-          <h1>Películas de {genres.find((genre) => genre.id == id).es}</h1>
+          `Películas de ${genres.find((genre) => genre.id == id).es}`
         ) : (
-          <h1>{genres.find((genre) => genre.id == id).en} films</h1>
+          `${genres.find((genre) => genre.id == id).en} films`
         )}
       </h1>
       <div className="grid gap-10 lg:grid-cols-4">

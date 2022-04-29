@@ -4,8 +4,7 @@ module.exports = {
     extend: {
       colors: {
         sidebar: "#14213d",
-        mustard: "#fca311",
-        orangy: "#de8a00",
+        
       },
     },
   },
