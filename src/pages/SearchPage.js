@@ -5,7 +5,7 @@ import moviesService from "../services/MoviesService";
 import { LanguageContext } from "../context/LanguageContext";
 const SearchPage = () => {
   const [info, setInfo] = useState([]);
-  const {language} = useContext(LanguageContext)
+  const { language } = useContext(LanguageContext);
   const { query } = useParams();
 
   useEffect(() => {
@@ -17,11 +17,11 @@ const SearchPage = () => {
       .catch((error) => {
         console.log(`ERROR: ${error}`);
       });
-  }, []);
+  }, [query, language]);
   return info ? (
     <div className="pt-12 lg:pt-0">
       <h1 className="text-center text-5xl mb-12 font-extrabold">
-        {query} films
+        {language === "en" ? `${query} films` : `Películas de ${query}`}
       </h1>
       <div className="grid gap-10  lg:grid-cols-4">
         {info
