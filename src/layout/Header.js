@@ -6,10 +6,7 @@ import { LanguageContext } from "../context/LanguageContext";
 
 const Header = () => {
   const { language, setLanguage } = useContext(LanguageContext)
-  useEffect(() => {
-    console.log(language)
   
-  }, [language])
   
   const [query, setQuery] = useState("");
   const [displayError, setDisplayError] = useState(false)
@@ -24,7 +21,7 @@ const Header = () => {
     } else showError()
   };
   return (
-    <div className=" bg-black text-white h-16 items-center flex justify-between px-2  lg:px-6">
+    <div className=" bg-black  text-white h-16 items-center flex justify-between px-2  lg:px-6">
       <label for="my-drawer-2" className=" drawer-button lg:hidden">
         <AiOutlineMenu />
       </label>

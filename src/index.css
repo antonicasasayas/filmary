@@ -6,9 +6,3 @@
   font-family: 'Inter';
   src: url(/src/fonts/Inter-VariableFont_slnt\,wght.ttf);
 }
-
-body {
-  overflow: hidden;
-  margin: 0;
-  font-family: 'Inter';
-}

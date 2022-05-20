@@ -1,4 +1,3 @@
-import "../App.css";
 import { useEffect, useState, useContext } from "react";
 import MovieCard from "../components/MovieCard";
 import { useParams } from "react-router-dom";

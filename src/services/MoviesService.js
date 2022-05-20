@@ -12,7 +12,7 @@ class MoviesService {
   }
 
   getTopRated = (language) =>
-    this.instance.get(`/movie/top_rated?language=${language}`);
+    this.instance.get(`/movie/popular?language=${language}`);
   getBySearch = (query, language = 'en') =>
     this.instance.get(`/search/movie?query=${query}&language=${language}`);
   getByGenre = (genre, language = 'en') =>

@@ -1,16 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
-const MovieCard = ({ id, poster_path }) => {
+import { StyledImage } from "./styles/Image.styled";
+import { SCLink } from "./styles/Link.styled";
+const MovieCard = ({ id, backdrop_path }) => {
   return (
-    <Link to={"/movies/" + id}>
-      <div className="rounded-lg  cursor-pointer shadow-md w-64">
-        <img
-          className="w-72 rounded-md"
-          src={"https://image.tmdb.org/t/p/w500" + poster_path}
+    <SCLink to={"/movies/" + id}>
+        <StyledImage
+          
+          src={"https://image.tmdb.org/t/p/w500" + backdrop_path}
           alt="poster_image"
         />
-      </div>
-    </Link>
+     </SCLink>
   );
 };
 

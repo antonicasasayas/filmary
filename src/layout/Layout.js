@@ -1,7 +1,10 @@
-import React, {useContext} from 'react'
-import Header from './Header'
-import { Link } from 'react-router-dom';
-import { LanguageContext } from '../context/LanguageContext';
+import React, { useContext } from "react";
+import Header from "./Header";
+import { Link } from "react-router-dom";
+import { LanguageContext } from "../context/LanguageContext";
+import { StyledLayout } from "../components/styles/Layout.styled";
+import { StyledFlexContainer } from "../components/styles/FlexContainer.styled";
+import { SidebarStyled } from "../components/styles/Sidebar.styled";
 const genres = [
   {
     id: 28,
@@ -58,7 +61,7 @@ const genres = [
     en: "Horror",
     es: "Terror",
   },
-  
+
   {
     id: 9648,
     en: "Mystery",
@@ -79,36 +82,31 @@ const genres = [
     en: "Thriller",
     es: "Thriller",
   },
-  
 ];
 const Layout = ({ children }) => {
-  const {language} = useContext(LanguageContext)
+  const { language } = useContext(LanguageContext);
   return (
     <>
       <Header />
 
-      <div className="drawer drawer-mobile">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle " />
-        <div className="drawer-content  flex flex-col items-center  justify-center">
-          <main className=" text-white h-full lg:pt-12  ">{children}</main>
-        </div>
-        
-        <div className="drawer-side">
-        
-          <label for="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4  bg-sidebar overflow-y-auto w-64 text-white ">
-            {genres.map((genre) => (
-              <div key={genre.id} className=" inline-block my-1.5  text-xl">
-                <Link to={"/genre/" + genre.id}>
-                  <span className="cursor-pointer ">{language === 'en' ? genre.en : genre.es}</span>
-                </Link>
-              </div>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <StyledFlexContainer>
+        <SidebarStyled>
+          {genres.map((genre) => (
+            <section key={genre.id} className="">
+              <Link to={"/genre/" + genre.id}>
+                <span className="cursor-pointer ">
+                  {language === "en" ? genre.en : genre.es}
+                </span>
+              </Link>
+            </section>
+          ))}
+        </SidebarStyled>
+        <StyledLayout>
+          <main>{children}</main>
+        </StyledLayout>
+      </StyledFlexContainer>
     </>
   );
-}
+};
 
-export default Layout
+export default Layout;
