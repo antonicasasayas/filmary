@@ -1,69 +1,110 @@
 import { useEffect, useState, useContext } from "react";
-import MovieCard from "../components/MovieCard";
 import moviesService from "../services/MoviesService";
 import { LanguageContext } from "../context/LanguageContext";
-import { SCSlider } from "../components/styles/Slider.styled";
-import { SCArrow } from "../components/styles/Arrow.styled";
-import { SCSliderContainer } from "../components/styles/SliderContainer.styled";
-import { SCSectionTitle } from "../components/styles/SectionTitle.styled";
+import Carousel from "../components/Carousel";
 function Home() {
-  const [movies, setMovies] = useState([]);
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  const [isTransitionActive, setIsTransitionActive] = useState(true);
-  console.log(isTransitionActive);
-  const handleMaxIndex = () => {
-    const maxIndex = movies.length/ 5;
-    if (carouselIndex >= maxIndex) {
-      setIsTransitionActive(false)
-      setCarouselIndex(0)
-    } else setCarouselIndex((prevIndex) => prevIndex + 1);
-  };
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [actionMovies, setActionMovies] = useState([]);
+  const [comedyMovies, setComedyMovies] = useState([]);
+  const [dramaMovies, setDramaMovies] = useState([]);
+  const [horrorMovies, setHorrorMovies] = useState([]);
   const { language } = useContext(LanguageContext);
+
   useEffect(() => {
+    //Get Popular Movies
     moviesService
-      .getTopRated(language)
+      .getMostPopular()
       .then((response) => {
-        setMovies([
+        setPopularMovies([
           ...response.data.results,
-          ...response.data.results.slice(0, 6),
+          //Add the first 6 at the end to recreate an infinite loop when scrolling
+          ...response.data.results.slice(0, 5),
         ]);
       })
       .catch((error) => {
         console.log(`ERROR: ${error}`);
       });
-  }, [language]);
+
+    //Get Action Movies
+    moviesService
+      .getByGenre(28)
+      .then((response) => {
+        setActionMovies([
+          ...response.data.results,
+          ...response.data.results.slice(0, 5),
+        ]);
+      })
+      .catch((error) => {
+        console.log(`ERROR: ${error}`);
+      });
+
+    //Get Comedy Movies
+    moviesService
+      .getByGenre(35)
+      .then((response) => {
+        setComedyMovies([
+          ...response.data.results,
+          ...response.data.results.slice(0, 5),
+        ]);
+      })
+      .catch((error) => {
+        console.log(`ERROR: ${error}`);
+      });
+
+    //Get Drama Movies
+    moviesService
+      .getByGenre(18)
+      .then((response) => {
+        setDramaMovies([
+          ...response.data.results,
+          ...response.data.results.slice(0, 5),
+        ]);
+      })
+      .catch((error) => {
+        console.log(`ERROR: ${error}`);
+      });
+
+    //Get Horror Movies
+    moviesService
+      .getByGenre(27)
+      .then((response) => {
+        setHorrorMovies([
+          ...response.data.results,
+          ...response.data.results.slice(0, 5),
+        ]);
+      })
+      .catch((error) => {
+        console.log(`ERROR: ${error}`);
+      });
+  }, []);
 
   return (
     <div className="">
-      <SCSectionTitle>
-        {language === "en" ? "The most popular today" : "Las más populares hoy"}
-      </SCSectionTitle>
-
-      <SCSliderContainer>
-        <SCArrow
-          carouselIndex={carouselIndex}
-          onClick={() => setCarouselIndex((prevIndex) => prevIndex - 1)}
-          type="left"
-        >
-          <div>&#8249;</div>
-        </SCArrow>
-
-        <SCSlider
-          isTransitionActive={isTransitionActive}
-          carouselIndex={carouselIndex}
-        >
-          {movies.map((movie, index) => (
-            <MovieCard
-              key={index}
-              id={movie.id}
-              backdrop_path={movie.backdrop_path}
-            />
-          ))}
-        </SCSlider>
-        <SCArrow onClick={() => handleMaxIndex()} type="right">
-          <div>&#8250;</div>
-        </SCArrow>
-      </SCSliderContainer>
+      <Carousel
+        title={{ en: "The most popular", es: "Las más populares" }}
+        movies={popularMovies}
+        language={language}
+      />
+      <Carousel
+        title={{ en: "Comedy", es: "Comedias" }}
+        movies={comedyMovies}
+        language={language}
+      />
+      <Carousel
+        title={{ en: "Drama", es: "Dramas" }}
+        movies={dramaMovies}
+        language={language}
+      />
+      <Carousel
+        title={{ en: "Action", es: "Acción" }}
+        movies={actionMovies}
+        language={language}
+      />
+      <Carousel
+        title={{ en: "Horror", es: "Terror" }}
+        movies={horrorMovies}
+        language={language}
+      />
     </div>
   );
 }

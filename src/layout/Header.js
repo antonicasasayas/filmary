@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineSearch} from "react-icons/ai";
 import { useContext } from "react";
 import { LanguageContext } from "../context/LanguageContext";
 
@@ -22,9 +22,7 @@ const Header = () => {
   };
   return (
     <div className=" bg-black  text-white h-16 items-center flex justify-between px-2  lg:px-6">
-      <label for="my-drawer-2" className=" drawer-button lg:hidden">
-        <AiOutlineMenu />
-      </label>
+      
       <Link to="/">
         <span className=" text-xl lg:text-3xl underline font-bold italic">
           Filmary

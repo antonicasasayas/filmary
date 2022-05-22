@@ -28,7 +28,6 @@ export const SCArrow = styled.button`
   ${(props) =>
     props.type === "right"
       ? "border-top-right-radius: 0px; border-bottom-right-radius: 0"
-      : props.carouselIndex === 0
-      ? "display: none"
+      
       : "border-bottom-left-radius: 0; border-top-left-radius: 0"}
 `;

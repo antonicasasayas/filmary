@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const SCSectionTitle = styled.h2`
-font-weight: bold ;
-margin-bottom: 10px;
-font-size: 1.5rem;
+font-weight: 500 ;
+margin-bottom: 2px;
+font-size: 1.4rem;
 
 @media(max-width: 500px){
 font-size: 1rem;

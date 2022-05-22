@@ -11,7 +11,7 @@ class MoviesService {
     });
   }
 
-  getTopRated = (language) =>
+  getMostPopular = (language) =>
     this.instance.get(`/movie/popular?language=${language}`);
   getBySearch = (query, language = 'en') =>
     this.instance.get(`/search/movie?query=${query}&language=${language}`);

@@ -4,7 +4,7 @@ const theme = {
   white: "#fff",
   darkBlue: "#14213d",
   black: "#000",
-  charcoal: "#2A303C",
+  charcoal: "#141414",
 };
 
 const GlobalStyle = createGlobalStyle`

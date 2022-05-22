@@ -1,8 +1,7 @@
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
-import MovieCard from "./MovieCard";
-import { BrowserRouter } from "react-router-dom";
-test("renders content", () => {
+import Carousel from "./Carousel";
+test("button slides the carousel", () => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/w500";
 
   const mockMovie = {
@@ -11,9 +10,7 @@ test("renders content", () => {
   };
 
   render(
-    <BrowserRouter>
-      <MovieCard {...mockMovie} />
-    </BrowserRouter>
+      <Carousel {...mockMovie} />
   );
 
   const movieImage = screen.getByAltText("poster_image");

@@ -7,5 +7,5 @@ export const SCSlider = styled.div`
   margin: 0 0.25rem;
   transform: translateX(calc(${({ carouselIndex }) => carouselIndex * -100}%));
   ${({ isTransitionActive }) =>
-    isTransitionActive ? "transition: transform 250ms ease-in-out" : ""}
+    isTransitionActive ? "transition: transform 500ms ease-in-out" : ""}
 `;
