@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { SCSlider } from "../components/styles/Slider.styled";
-import { SCArrow } from "../components/styles/Arrow.styled";
 import { SCSliderContainer } from "../components/styles/SliderContainer.styled";
 import MovieCard from "../components/MovieCard";
 import { SCSectionTitle } from "../components/styles/SectionTitle.styled";
+import Arrow from "./Arrow";
 const Carousel = ({ movies, language, title }) => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isTransitionActive, setIsTransitionActive] = useState(true);
@@ -24,7 +24,7 @@ const Carousel = ({ movies, language, title }) => {
     if (carouselIndex === 0) setTimeout(setIsTransitionActive(true), 250);
     //check if index is max to remove transition
     else if (carouselIndex === Math.floor(maxIndex)) {
-      setTimeout(() => setIsTransitionActive(false), 600);
+      setTimeout(() => setIsTransitionActive(false), 250);
     }
   }, [carouselIndex, movies.length]);
 
@@ -38,13 +38,11 @@ const Carousel = ({ movies, language, title }) => {
     <div>
       <SCSectionTitle>{language === "en" ? title.en : title.es}</SCSectionTitle>
       <SCSliderContainer>
-        <SCArrow
-          carouselIndex={carouselIndex}
-          onClick={() => handleMinIndex()}
+        <Arrow
+          html="&#8249;"
+          onClick={handleMinIndex}
           type="left"
-        >
-          <div>&#8249;</div>
-        </SCArrow>
+        />
 
         <SCSlider
           isTransitionActive={isTransitionActive}
@@ -58,9 +56,12 @@ const Carousel = ({ movies, language, title }) => {
             />
           ))}
         </SCSlider>
-        <SCArrow onClick={() => handleMaxIndex()} type="right">
-          <div>&#8250;</div>
-        </SCArrow>
+        <Arrow
+          html="&#8250;"
+          onClick={handleMaxIndex}
+          type="right"
+          data-testid="sliderButton"
+        />
       </SCSliderContainer>
     </div>
   );
