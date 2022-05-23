@@ -13,7 +13,7 @@ export default function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
-<GlobalStyle />
+        <GlobalStyle />
         <LanguageContext.Provider value={{ language, setLanguage }}>
           <Layout>
             <Routes>
