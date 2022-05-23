@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { AiOutlineSearch} from "react-icons/ai";
 import { useContext } from "react";
 import { LanguageContext } from "../context/LanguageContext";
-
+import { SCNavbar } from "../components/styles/Navbar.styled";
+import { SCLogo } from "../components/styles/Logo.styled";
+import { SCInputContainer } from "../components/styles/InputContainer.styled";
 const Header = () => {
   const { language, setLanguage } = useContext(LanguageContext)
   
@@ -16,39 +18,40 @@ const Header = () => {
   }
   const sendQuery = (e) => {
     e.preventDefault();
+
     if (query.length > 2) {
     window.location.href = "/search/" + query;
     } else showError()
   };
   return (
-    <div className=" bg-black  text-white h-16 items-center flex justify-between px-2  lg:px-6">
+    <SCNavbar>
       
       <Link to="/">
-        <span className=" text-xl lg:text-3xl underline font-bold italic">
+        <SCLogo>
           Filmary
-        </span>
+        </SCLogo>
       </Link>
 
-      <form onSubmit={(e) => sendQuery(e)} className="relative">
-        <div className="flex flex-col items-center lg:flex-row-reverse">
+      <form onSubmit={(e) => sendQuery(e)}>
+        <SCInputContainer>
           <input
             onChange={(e) => setQuery(e.target.value)}
             type="text"
             placeholder={language === 'en' ? 'Search...' : 'Buscar...'}
-            className="h-9 w-40 lg:w-96 pl-4 text-black rounded-md"
+            
           ></input>
           {displayError && (
-            <span className="text-red-500 text-xs mr-2">
+            <span>
               { language === 'en' ? 'Type more than 2 char.' : 'Escribe más de 2 caracteres.'}
             </span>
           )}
-        </div>
+        </SCInputContainer>
 
-        <button className="absolute right-1  text-black top-1" type="submit">
+        <button type="submit">
           <AiOutlineSearch size={30} />
         </button>
       </form>
-      <select onChange={ (e) => setLanguage(e.target.value)} className="text-black p-1.5 rounded-md" name="language" id="">
+      <select onChange={ (e) => setLanguage(e.target.value)}  name="language" id="">
         <option value="en">
           English
         </option>
@@ -56,7 +59,7 @@ const Header = () => {
           Español
         </option>
       </select>
-    </div>
+    </SCNavbar>
   );
 };
 

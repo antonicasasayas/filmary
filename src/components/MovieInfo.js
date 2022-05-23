@@ -7,6 +7,8 @@ import { SCSectionTitle } from "./styles/SectionTitle.styled";
 import { SCGenreSpan } from "./styles/MovieInfo/GenreSpan.styled";
 import { SCRatingContainer } from "./styles/MovieInfo/RatingContainer.styled.js";
 import { SCRatingSpan } from "./styles/MovieInfo/RatingSpan.styled";
+import MoviePoster from "./MoviePoster";
+import { SCRecommendedFilms } from "./styles/RecommendedFilms.styled";
 const MovieInfo = ({ info, recommendedFilms, language }) => {
   const { poster_path, release_date, genres, overview, vote_average, title } =
     info;
@@ -46,16 +48,16 @@ const MovieInfo = ({ info, recommendedFilms, language }) => {
           </SCRatingContainer>
         </SCOverviewContainer>
       </SCMovieInfoContainer>
-      <SCSectionTitle align='center'>
+      <SCSectionTitle align='center' margin='20px'>
         {language === "en"
           ? `If you liked ${title}, you will LOVE...`
           : `Si te gustó ${title}, te va a ENCANTAR... `}
       </SCSectionTitle>
-      <div className="grid mx-2 lg:grid-cols-4 pb-24 gap-10">
+      <SCRecommendedFilms>
         {recommendedFilms.slice(0, 4).map((movie) => (
-          <MovieCard key={movie.id} {...movie} />
+          <MoviePoster key={movie.id} id={movie.id} poster_path={movie.poster_path} />
         ))}
-      </div>
+      </SCRecommendedFilms>
     </>
   );
 };

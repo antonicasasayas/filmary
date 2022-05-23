@@ -20,9 +20,10 @@ export const SCOverviewContainer = styled.div`
       line-height: 1;
     }
   }
-  span {
+  >span {
     font-size: 1.125rem;
     line-height: 1.75rem;
+    margin: 5px;
   }
   
   @media (min-width: 1024px) {

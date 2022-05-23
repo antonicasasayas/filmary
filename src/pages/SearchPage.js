@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState, useContext } from "react";
-import MovieCard from "../components/MovieCard";
 import moviesService from "../services/MoviesService";
 import { LanguageContext } from "../context/LanguageContext";
+import MoviePoster from "../components/MoviePoster";
+import { SCSearchPageContainer } from "../components/styles/SearchPageContainer.styled";
 const SearchPage = () => {
   const [info, setInfo] = useState([]);
   const { language } = useContext(LanguageContext);
@@ -19,18 +20,18 @@ const SearchPage = () => {
       });
   }, [query, language]);
   return info ? (
-    <div className="pt-12 lg:pt-0">
-      <h1 className="text-center text-5xl mb-12 font-extrabold">
+    <SCSearchPageContainer>
+      <h1>
         {language === "en" ? `${query} films` : `Películas de ${query}`}
       </h1>
-      <div className="grid gap-10  lg:grid-cols-4">
+      <section>
         {info
           .filter((movie) => movie.poster_path?.length > 0)
           .map((movie) => (
-            <MovieCard key={movie.id} {...movie} />
+            <MoviePoster key={movie.id} {...movie} />
           ))}
-      </div>
-    </div>
+      </section>
+    </SCSearchPageContainer>
   ) : (
     "Loading"
   );
